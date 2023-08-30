@@ -14,7 +14,7 @@
 
                 Snail(0);
             }
-            Console.SetCursorPosition(50, SNAIL_POS_Y);
+            Console.SetCursorPosition(SNAIL_LIFE, SNAIL_POS_Y);
             Snail(1);
 
             Console.ReadLine();
