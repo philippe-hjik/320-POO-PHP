@@ -17,10 +17,13 @@
 
             while (true)
             {
-                plane.update();
 
                 // Temporiser
-                Thread.Sleep(50);
+                Console.Clear();
+                plane.draw();
+                
+                //Temporiser
+                Thread.Sleep(10);
             }
         }
     }

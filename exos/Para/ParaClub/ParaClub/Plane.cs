@@ -10,8 +10,8 @@ namespace ParaClub
     {
         private int PlaneX;
         private int PlaneY;
-        private int PlaneWidth = 27;
-        private int PlaneHeight = 6;
+        private int z = Config.SCREEN_WIDTH;
+        
 
         public string[] view =
         {
@@ -25,24 +25,21 @@ namespace ParaClub
 
         public void update()
         {
-            if(Config.SCREEN_WIDTH - PlaneWidth > PlaneX)
-                Console.MoveBufferArea(PlaneX++, PlaneY, PlaneWidth, PlaneHeight, PlaneX, PlaneY);
-            else
-                Console.MoveBufferArea(PlaneX++, PlaneY, PlaneWidth--, PlaneHeight, PlaneX, PlaneY);
+            Console.SetCursorPosition(PlaneX++, PlaneY);
         }
-
-
-
-
-
 
         public void draw()
-    {
-        for (int x = 0, y = 0; y < view.Length; y++)
         {
-            Console.SetCursorPosition(x, y);
-            Console.Write(view[y]);
+            if (PlaneX >= 149)
+                PlaneX = 0;
+
+            Console.SetCursorPosition(PlaneX++, PlaneY);
+            for (int x = 0, y = 0; y < view.Length; y++)
+            {
+                Console.SetCursorPosition(PlaneX, y);
+                Console.Write(view[y]);
+            }
+            
         }
     }
-}
 }
