@@ -40,11 +40,13 @@
                             break;
                         case ConsoleKey.Spacebar:
                             Verif = 1;
+                            plane.ParaX = plane.PlaneX;
                             break;
                     }
                 }
                 if(Verif == 1)
                 {
+                    
                     plane.dropParachutist();
                 }
 
