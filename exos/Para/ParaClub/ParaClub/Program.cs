@@ -13,9 +13,15 @@
             Plane plane = new Plane();
             plane.draw();
 
-            Console.ReadLine();
+            //Console.ReadLine();
 
+            while (true)
+            {
+                plane.update();
 
+                // Temporiser
+                Thread.Sleep(50);
+            }
         }
     }
 }
