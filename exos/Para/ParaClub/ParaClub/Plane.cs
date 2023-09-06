@@ -3,14 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ParaClub;
 
 namespace ParaClub
 {
     class Plane
     {
-        private int PlaneX;
-        private int PlaneY;
-        private int z = Config.SCREEN_WIDTH;
+        public int PlaneX;
+        public int PlaneY;
+        public int ParaX;
+        public int ParaY = 10;
+
+        public int DropParaX;
+        public int DropParaY;
+
+        public int z = Config.SCREEN_WIDTH;
         
 
         public string[] view =
@@ -41,5 +48,35 @@ namespace ParaClub
             }
             
         }
+        
+        public void dropParachutist()
+        {
+            Console.SetCursorPosition(ParaX, ParaY);
+            for (int x = 0, y = 0; y < withoutParachute.Length; y++)
+            {
+                Console.SetCursorPosition(PlaneX, ParaY++);
+                Console.Write(withoutParachute[y]);
+            }
+        }
+
+        private string[] withoutParachute =
+        {
+         @"     ",
+         @"     ",
+         @"     ",
+         @"  o  ",
+         @" /░\ ",
+         @" / \ ",
+     };
+
+        private string[] withParachute =
+{
+         @" ___ ",
+         @"/|||\",
+         @"\   /",
+         @" \o/ ",
+         @"  ░  ",
+         @" / \ ",
+     };
     }
 }
