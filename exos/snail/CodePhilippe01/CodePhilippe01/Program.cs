@@ -5,16 +5,41 @@
         static void Main(string[] args)
         {
             const int SNAIL_POS_Y = 15;
-            const int SNAIL_LIFE = 50;
+            const int SNAIL_SPEED = 39;
 
-            for (int i = 0; i != SNAIL_LIFE; i++)
+            int snailLife = 50;
+            int x = 0;
+
+            Console.CursorVisible = false;
+
+            /*
+            while(snailLife != 0)
             {
-                Console.SetCursorPosition(i, SNAIL_POS_Y);
-                Thread.Sleep(39);
+                Console.SetCursorPosition(x, SNAIL_POS_Y);
+                Thread.Sleep(SNAIL_SPEED);
 
                 Snail(0);
+
+                x++;
+                snailLife--;
             }
-            Console.SetCursorPosition(SNAIL_LIFE, SNAIL_POS_Y);
+            */
+
+            Snail(0);
+            Console.MoveBufferArea(x, 0, 8, 2, x++, SNAIL_POS_Y);
+
+            while (snailLife != 0)
+            {
+                Console.MoveBufferArea(x,SNAIL_POS_Y, 8, 2, x++, SNAIL_POS_Y);
+
+                Thread.Sleep(SNAIL_SPEED);
+
+                //Snail(0);
+
+                snailLife--;
+            }
+
+            Console.SetCursorPosition(x, SNAIL_POS_Y);
             Snail(1);
 
             Console.ReadLine();
