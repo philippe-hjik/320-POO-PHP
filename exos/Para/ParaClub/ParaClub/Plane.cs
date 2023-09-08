@@ -40,7 +40,7 @@ namespace ParaClub
             if (PlaneX >= 149)
                 PlaneX = 0;
 
-            Console.SetCursorPosition(PlaneX++, PlaneY);
+            Console.SetCursorPosition(PlaneX, PlaneY);
             for (int x = 0, y = 0; y < view.Length; y++)
             {
                 Console.SetCursorPosition(PlaneX, y);
@@ -54,7 +54,7 @@ namespace ParaClub
             Console.SetCursorPosition(ParaX, ParaY);
             for (int x = 0, y = 0; y < withoutParachute.Length; y++)
             {
-                Console.SetCursorPosition(PlaneX, ParaY++);
+                Console.SetCursorPosition(ParaX, ParaY++);
                 Console.Write(withoutParachute[y]);
             }
         }
