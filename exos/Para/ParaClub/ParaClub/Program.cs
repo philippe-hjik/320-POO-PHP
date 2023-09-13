@@ -1,58 +1,55 @@
-﻿namespace ParaClub
+﻿using Parachutes;
+
+// Initialiser la console
+Console.Clear();
+Console.CursorVisible = false;
+Console.WindowHeight = Config.SCREEN_HEIGHT;
+Console.WindowWidth = Config.SCREEN_WIDTH;
+
+// Pour les interactions utilisateur
+ConsoleKeyInfo keyPressed;
+
+// Créer le groupe de parachutistes
+List<Para> paraClub = new List<Para>();
+paraClub.Add(new Para("Bob"));
+paraClub.Add(new Para("Alice"));
+paraClub.Add(new Para("Max"));
+
+// Créer l'avion et embarquer le club
+Plane plane = new Plane();
+foreach (Para para in paraClub)
 {
+    para.isInAPlane = true;
+    plane.board(para);
+}
 
-    internal class Program
+while (true)
+{
+    Console.Clear();
+    if (Console.KeyAvailable) // L'utilisateur a pressé une touche
     {
-
-        static void Main(string[] args)
+        keyPressed = Console.ReadKey(false);
+        switch (keyPressed.Key)
         {
-            Console.WindowHeight = Config.SCREEN_HEIGHT;
-            Console.WindowWidth = Config.SCREEN_WIDTH;
-            Console.CursorVisible = Config.CursonVisible;
-
-            ConsoleKeyInfo keyPressed;
-            int Verif = 0;
-
-            Plane plane = new Plane();
-            plane.draw();
-
-            Para bob = new Para("Bob");
-            Para Sarah = new Para("Sarah");
-
-
-            while (true)
-            {
-                
-                plane.update();
-                // Temporiser
-                Console.Clear();
-
-                plane.draw();
-
-                if (Console.KeyAvailable) // L'utilisateur a pressé une touche
-                {
-                    keyPressed = Console.ReadKey(false);
-                    switch (keyPressed.Key)
-                    {
-                        case ConsoleKey.Escape:
-                            Environment.Exit(0);
-                            break;
-                        case ConsoleKey.Spacebar:
-                            Verif = 1;
-                            plane.ParaX = plane.PlaneX;
-                            break;
-                    }
-                }
-                if(Verif == 1)
-                {
-                    
-                    plane.dropParachutist();
-                }
-
-                //Temporiser
-                Thread.Sleep(20);
-
-            }
+            case ConsoleKey.Escape:
+                Environment.Exit(0);
+                break;
+            case ConsoleKey.Spacebar:
+                plane.dropParachutist();
+                break;
         }
     }
+
+    plane.update();
+    foreach (Para para in paraClub)
+    {
+        para.update();
+    }
+
+    plane.draw();
+    foreach (Para para in paraClub)
+    {
+        para.draw();
+    }
+    Thread.Sleep(20);
 }

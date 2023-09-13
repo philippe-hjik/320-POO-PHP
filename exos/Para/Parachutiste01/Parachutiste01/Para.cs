@@ -45,5 +45,45 @@ namespace Parachutiste01
         {
             this.name = name;
         }
+        public void drawPara()
+        {
+            string[] view = parachuteIsOpen ? withParachute : withoutParachute;
+
+            if (!this.isInAPlane)
+            {
+                for (int i = 0; i < view.Length; i++)
+                {
+                    Console.SetCursorPosition(x, Config.SCREEN_HEIGHT - this.altitude + i);
+                    Console.Write(view[i]);
+                }
+            }
+        }
+
+        public void updatePara()
+        {
+            if (!isInAPlane) // Il a sauté
+            {
+                if (altitude > PARA_HEIGHT) // il est en l'air
+                {
+                    if (parachuteIsOpen)
+                    {
+                        altitude -= 1; // il tombe lentement
+                    }
+                    else
+                    {
+                        altitude -= 3; // il tombe vite
+                    }
+                    // Décision d'ouvrir le parachute
+                    if (altitude < Config.SCREEN_HEIGHT / 2)
+                    {
+                        parachuteIsOpen = true;
+                    }
+                }
+                else // il est au sol
+                {
+                    parachuteIsOpen = false;
+                }
+            }
+        }
     }
 }

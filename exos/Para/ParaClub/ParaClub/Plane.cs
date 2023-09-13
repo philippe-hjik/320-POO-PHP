@@ -3,80 +3,86 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ParaClub;
 
-namespace ParaClub
+namespace Parachutes
 {
     class Plane
     {
-        public int PlaneX;
-        public int PlaneY;
-        public int ParaX;
-        public int ParaY = 10;
+        // Display attributes
+        // dimensions of the ASCII representation of the plane
+        public const int WIDTH = 28;
+        public const int HEIGHT = 6;
 
-        public int DropParaX;
-        public int DropParaY;
-
-        public int z = Config.SCREEN_WIDTH;
-        
-
-        public string[] view =
+        private string[] view =
         {
-                @" _                         ",
-                @"| \                        ",
-                @"|  \       ______          ",
-                @"--- \_____/  |_|_\____  |  ",
-                @"  \_______ --------- __>-} ",
-                @"        \_____|_____/   |  "
+            @" _                         ",
+            @"| \                        ",
+            @"|  \       ______          ",
+            @"--- \_____/  |_|_\____  |  ",
+            @"  \_______ --------- __>-} ",
+            @"        \_____|_____/   |  "
         };
 
-        public void update()
+        // Model attributes
+        public int x;
+        public int altitude;
+        private List<Para> parachutists;
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public Plane()
         {
-            Console.SetCursorPosition(PlaneX++, PlaneY);
+            x = 0;
+            altitude = Config.SCREEN_HEIGHT;
+            parachutists = new List<Para>();
         }
 
+        /// <summary>
+        /// Render
+        /// </summary>
         public void draw()
         {
-            if (PlaneX >= 149)
-                PlaneX = 0;
-
-            Console.SetCursorPosition(PlaneX, PlaneY);
-            for (int x = 0, y = 0; y < view.Length; y++)
+            for (int i = 0; i < view.Length; i++)
             {
-                Console.SetCursorPosition(PlaneX, y);
-                Console.Write(view[y]);
-            }
-            
-        }
-        
-        public void dropParachutist()
-        {
-            Console.SetCursorPosition(ParaX, ParaY);
-            for (int x = 0, y = 0; y < withoutParachute.Length; y++)
-            {
-                Console.SetCursorPosition(ParaX, ParaY++);
-                Console.Write(withoutParachute[y]);
+                Console.SetCursorPosition(x, i);
+                Console.Write(view[i]);
             }
         }
 
-        private string[] withoutParachute =
+        /// <summary>
+        /// Move the plane
+        /// </summary>
+        /// <param name="window_width"></param>
+        public void update()
         {
-         @"     ",
-         @"     ",
-         @"     ",
-         @"  o  ",
-         @" /░\ ",
-         @" / \ ",
-     };
+            if (x >= Config.SCREEN_WIDTH)
+            {
+                x = 0;
+            }
+            else
+            {
+                x++;
+            }
+        }
 
-        private string[] withParachute =
-{
-         @" ___ ",
-         @"/|||\",
-         @"\   /",
-         @" \o/ ",
-         @"  ░  ",
-         @" / \ ",
-     };
+        /// <summary>
+        /// Take a parachustist on board
+        /// </summary>
+        /// <param name="para"></param>
+        public void board(Para para)
+        {
+            this.parachutists.Add(para);
+        }
+
+        internal void dropParachutist()
+        {
+            if (parachutists.Count == 0) { return; }
+            Para parachutist = parachutists.First();
+            parachutists.RemoveAt(0);
+            parachutist.x = x;
+            parachutist.altitude = this.altitude;
+            parachutist.isInAPlane = false;
+        }
     }
 }

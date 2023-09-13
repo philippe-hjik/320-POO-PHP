@@ -18,7 +18,7 @@ namespace Parachutiste01
         public Plane()
         {
             x = 0;
-            y = 5;
+            y = 0;
             parachutists = new List<Para>();
         }
         public string[] view =
@@ -33,20 +33,11 @@ namespace Parachutiste01
 
         public void update()
         {
-            Console.MoveBufferArea(x++, y, PLANE_WIDTH, PLANE_HEIGHT, x, y);
+            Console.SetCursorPosition(x++, y);
 
-            if (x >= Config.SCREEN_WIDTH - PLANE_WIDTH)
+            if (x >= Config.SCREEN_WIDTH - 1)
             {
-                for (int i = 0, z = PLANE_WIDTH, l = 0, p = 1; i < PLANE_WIDTH; i++)
-                {
-                    Console.MoveBufferArea(PLANE_WIDTH - 1, y, 1, PLANE_HEIGHT, l, y);
 
-                    Console.MoveBufferArea(0, y, p++, PLANE_HEIGHT, 1, y);
-
-                    Console.MoveBufferArea(x++, y, z--, PLANE_HEIGHT, x, y);
-
-                    Thread.Sleep(40);
-                }
                 x = 0;
             }
 
@@ -66,12 +57,18 @@ namespace Parachutiste01
             this.parachutists.Add(para);
         }
 
+        public void board(Para para)
+        {
+            this.parachutists.Add(para);
+        }
+
         public void dropParachutist()
         {
             if (parachutists.Count == 0) { return; }
             Para parachutist = parachutists.First();
             parachutist.x = x;
             parachutist.altitude = this.y;
+            parachutist.isInAPlane = false;
         }
     }
 }

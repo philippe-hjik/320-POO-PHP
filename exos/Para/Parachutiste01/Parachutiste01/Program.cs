@@ -16,11 +16,16 @@
             paraClub.Add(new Para("Bob"));
             paraClub.Add(new Para("Alice"));
 
-            plane.draw();
+            foreach (Para para in paraClub)
+            {
+                para.isInAPlane = true;
+                plane.board(para);
+            }
 
             while (true)
             {
-                if(Console.KeyAvailable) // L'utilisateur a pressé une touche
+                Console.Clear();
+                if (Console.KeyAvailable) // L'utilisateur a pressé une touche
                 {
                     keyPressed = Console.ReadKey(false);
 
@@ -30,13 +35,27 @@
                             Environment.Exit(0);
                             break;
                         case ConsoleKey.Spacebar:
+                            plane.dropParachutist();
                             break;
                     }
                 }
+                
 
                 plane.update();
+                foreach (Para para in paraClub)
+                {
+                    para.updatePara();
+                }
 
-                Thread.Sleep(40);
+                plane.draw();
+                foreach (Para para in paraClub)
+                {
+                    para.drawPara();
+                }
+
+
+
+                Thread.Sleep(20);
             }
             
         }
