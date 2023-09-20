@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // Les informations générales relatives à un assembly dépendent de
 // l'ensemble d'attributs suivant. Changez les valeurs de ces attributs pour modifier les informations
 // associées à un assembly.
-[assembly: AssemblyTitle("ConsoleApp1")]
+[assembly: AssemblyTitle("WindowsFormsApp1")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("DGEP")]
-[assembly: AssemblyProduct("ConsoleApp1")]
+[assembly: AssemblyProduct("WindowsFormsApp1")]
 [assembly: AssemblyCopyright("Copyright © DGEP 2023")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,9 +20,9 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // Le GUID suivant est pour l'ID de la typelib si ce projet est exposé à COM
-[assembly: Guid("91e4fa6e-f2c5-47f7-b91f-efa3cc7529cc")]
+[assembly: Guid("47a1f3f6-eb59-4c6e-b5d4-a71596699383")]
 
-// Les informations de version pour un assembly se composent des quatre valeurs suivantes :
+// Les informations de version pour un assembly se composent des quatre valeurs suivantes :
 //
 //      Version principale
 //      Version secondaire
